@@ -1,12 +1,8 @@
 <?php
 
-/**
- * Essa classe possui o metodo getQtdeNotas ele não está completo e cabe a você concluí-lo de acordo com os requisitos.
- */
 class Troco
 {
     /**
-     * Dado um valor em reais, retorna a quantidade de notas necessárias para formar o troco.
      * @param float $reais
      * @return array
      */
@@ -26,16 +22,20 @@ class Troco
             "0.05" => 0,
             "0.01" => 0,
         ];
+        return $this->calculaNotas(((float)$reais), $notas_qtd);
+    }
 
-        /*
-         * Coloque o seu código aqui.
-         * Você é livre para criar classes, arquivos e funções da maneira que achar melhor.
-         * Esse método deve retornar a quantidade de notas e moedas necessária para o valor em reais passado para ele
-         *
-         * Exemplo:
-         * getQtdeNotas(100.00); // Deve retornar algo como ['100' => 1]
-         */
-
-        return $notas_qtd;
+    private function calculaNotas($valor, $notas_qtd)
+    {
+      foreach ($notas_qtd as $notas => $notas_qtd) {
+        $nota_atual = ((float) $notas);
+        $lugarArray = ((string) $nota_atual);
+        while($valor >= $nota_atual){
+          $notas_qtd[$lugarArray] ++;
+          $valor = sprintf("%f.2", $valor - $nota_atual);
+          
+        }
+      }
+      return $notas_qtd;
     }
 }
